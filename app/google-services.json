@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "891977465466",
+    "project_id": "discoverpic-add43",
+    "storage_bucket": "discoverpic-add43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891977465466:android:efb977b04c86265bfcc5c3",
+        "android_client_info": {
+          "package_name": "com.example.discoverpic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891977465466-g6o7lt6dq3fi955t5on3jtsm8144dbq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASCyRm_JwSMOnC3vc6hvjuCB68H4Py958"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891977465466-g6o7lt6dq3fi955t5on3jtsm8144dbq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
