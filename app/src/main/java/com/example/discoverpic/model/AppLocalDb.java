@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.discoverpic.MyApplication;
 
-@Database(entities = {Post.class}, version = 1)
+@Database(entities = {Post.class}, version = 10)
 abstract class AppLocalDbRepository extends RoomDatabase {
     public abstract PostDao postDao();
 }

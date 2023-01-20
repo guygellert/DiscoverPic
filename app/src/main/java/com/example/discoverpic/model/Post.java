@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Entity
 public class Post {
-    @PrimaryKey
+    @PrimaryKey()
     @NonNull
     public String id = "";
     public String name = "";
