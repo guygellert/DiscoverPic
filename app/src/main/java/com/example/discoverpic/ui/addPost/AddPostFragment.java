@@ -24,6 +24,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.navigation.Navigation;
 
 import com.example.discoverpic.databinding.FragmentAddpostBinding;
+import com.example.discoverpic.model.FirebaseModel;
 import com.example.discoverpic.model.Model;
 import com.example.discoverpic.model.Post;
 
@@ -67,13 +68,14 @@ public class AddPostFragment extends Fragment {
             String name = binding.nameEt.getText().toString();
             String city = binding.cityEt.getText().toString();
             String country = binding.countryEt.getText().toString();
-            Post post = new Post("1",name,"",city, country, "123");
+            String id = Model.instance().getPostId();
+            Post post = new Post(id,name,"",city, country, "123");
 
             if (isAvatarSelected){
                 binding.avatarImg.setDrawingCacheEnabled(true);
                 binding.avatarImg.buildDrawingCache();
                 Bitmap bitmap = ((BitmapDrawable) binding.avatarImg.getDrawable()).getBitmap();
-                Model.instance().uploadImage("2", bitmap, url->{
+                Model.instance().uploadImage(id, bitmap, url->{
                     if (url != null){
                         post.setImgUrl(url);
                     }
@@ -86,6 +88,8 @@ public class AddPostFragment extends Fragment {
                     Navigation.findNavController(view1).popBackStack();
                 });
             }
+
+            Model.instance().setPostId();
         });
 
         binding.cancellBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).popBackStack());
@@ -99,11 +103,5 @@ public class AddPostFragment extends Fragment {
         });
 
         return root;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }
