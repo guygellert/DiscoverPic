@@ -7,6 +7,7 @@
     tools:context=".ui.addPost.AddPostFragment">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,21 +103,22 @@
                 <Button
                     android:id="@+id/saveBtn"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:layout_weight="1"
                     android:text="SAVE" />
 
                 <Button
                     android:id="@+id/cancellBtn"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:layout_weight="1"
                     android:text="CANCEL" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

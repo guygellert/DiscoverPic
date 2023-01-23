@@ -31,14 +31,6 @@ public class Model {
         void onComplete(T data);
     }
 
-    public String getPostId(){
-        return Post.POST_ID;
-    }
-
-    public void setPostId(){
-        Post.setPostId();
-    }
-
     public enum LoadingState{
         LOADING,
         NOT_LOADING

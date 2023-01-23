@@ -28,6 +28,8 @@ import com.example.discoverpic.model.FirebaseModel;
 import com.example.discoverpic.model.Model;
 import com.example.discoverpic.model.Post;
 
+import java.util.UUID;
+
 public class AddPostFragment extends Fragment {
 
     private FragmentAddpostBinding binding;
@@ -68,8 +70,8 @@ public class AddPostFragment extends Fragment {
             String name = binding.nameEt.getText().toString();
             String city = binding.cityEt.getText().toString();
             String country = binding.countryEt.getText().toString();
-            String id = Model.instance().getPostId();
-            Post post = new Post(id,name,"",city, country, "123");
+            String id = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+            Post post = new Post(id,name,"",city, country, "456");
 
             if (isAvatarSelected){
                 binding.avatarImg.setDrawingCacheEnabled(true);
@@ -88,11 +90,11 @@ public class AddPostFragment extends Fragment {
                     Navigation.findNavController(view1).popBackStack();
                 });
             }
-
-            Model.instance().setPostId();
         });
 
-        binding.cancellBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).popBackStack());
+        binding.cancellBtn.setOnClickListener(view1 ->
+                Navigation.findNavController(view1).popBackStack()
+        );
 
         binding.cameraButton.setOnClickListener(view1->{
             cameraLauncher.launch(null);

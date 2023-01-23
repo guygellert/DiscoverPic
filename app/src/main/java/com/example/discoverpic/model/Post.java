@@ -48,8 +48,6 @@ public class Post {
     static final String LAST_UPDATED = "lastUpdated";
     static final String LOCAL_LAST_UPDATED = "posts_local_last_update";
 
-    static String POST_ID = "1";
-
     public static Post fromJson(Map<String, Object> json) {
         String id = (String) json.get(ID);
         String name = (String) json.get(NAME);
@@ -78,10 +76,6 @@ public class Post {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putLong(LOCAL_LAST_UPDATED, time);
         editor.commit();
-    }
-
-    public static void setPostId() {
-        POST_ID = POST_ID + 1;
     }
 
     public Map<String, Object> toJson() {
