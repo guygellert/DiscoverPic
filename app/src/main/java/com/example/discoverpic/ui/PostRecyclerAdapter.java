@@ -1,5 +1,6 @@
 package com.example.discoverpic.ui;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.discoverpic.R;
 import com.example.discoverpic.model.Post;
+import com.squareup.picasso.Picasso;
 //import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,8 +21,8 @@ import java.util.List;
 class PostViewHolder extends RecyclerView.ViewHolder{
     TextView nameTv;
     TextView locationTv;
-    List<Post> data;
     ImageView avatarImage;
+    List<Post> data;
 
     public PostViewHolder(@NonNull View itemView, List<Post> data) {
         super(itemView);
@@ -34,7 +36,7 @@ class PostViewHolder extends RecyclerView.ViewHolder{
         nameTv.setText(post.name);
         locationTv.setText(post.city + ", " + post.country);
         if (post.getImgUrl() != "") {
-//            Picasso.get().load(post.getImgUrl()).placeholder(R.drawable.tree).into(avatarImage);
+            Picasso.get().load(post.getImgUrl()).placeholder(R.drawable.tree).into(avatarImage);
         }else{
             avatarImage.setImageResource(R.drawable.tree);
         }

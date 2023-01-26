@@ -15,7 +15,7 @@ public interface PostDao {
     LiveData<List<Post>> getAll();
 
     @Query("select * from Post where userId = :userId")
-    Post getPostsByUserId(String userId);
+    LiveData<List<Post>> getPostsByUserId(String userId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Post... posts);

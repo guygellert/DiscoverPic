@@ -46,6 +46,15 @@ public class Model {
         return postsList;
     }
 
+    private LiveData<List<Post>> userPostsList;
+    public LiveData<List<Post>> getUserPosts() {
+        if(userPostsList == null){
+            userPostsList = localDb.postDao().getPostsByUserId("123");
+            refreshAllPosts();
+        }
+        return userPostsList;
+    }
+
     public void refreshAllPosts(){
         EventPostsListLoadingState.setValue(LoadingState.LOADING);
 
