@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 //import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Objects;
 
 
 class PostViewHolder extends RecyclerView.ViewHolder{
@@ -35,7 +36,8 @@ class PostViewHolder extends RecyclerView.ViewHolder{
     public void bind(Post post) {
         nameTv.setText(post.name);
         locationTv.setText(post.city + ", " + post.country);
-        if (post.getImgUrl() != "") {
+
+        if (!Objects.equals(post.getImgUrl(), "")) {
             Picasso.get().load(post.getImgUrl()).placeholder(R.drawable.tree).into(avatarImage);
         }else{
             avatarImage.setImageResource(R.drawable.tree);

@@ -49,7 +49,7 @@ public class Model {
     private LiveData<List<Post>> userPostsList;
     public LiveData<List<Post>> getUserPosts() {
         if(userPostsList == null){
-            userPostsList = localDb.postDao().getPostsByUserId("123");
+            userPostsList = localDb.postDao().getPostsByUserId("456");
             refreshAllPosts();
         }
         return userPostsList;
