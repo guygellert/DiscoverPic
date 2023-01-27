@@ -1,19 +1,17 @@
 package com.example.discoverpic.ui.profile;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.discoverpic.model.Model;
+import com.example.discoverpic.model.Post;
+
+import java.util.List;
+
 public class ProfileViewModel extends ViewModel {
+    private LiveData<List<Post>> data = Model.instance().getUserPosts();
 
-    private final MutableLiveData<String> mText;
-
-    public ProfileViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is profile fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Post>> getData(){
+        return data;
     }
 }
