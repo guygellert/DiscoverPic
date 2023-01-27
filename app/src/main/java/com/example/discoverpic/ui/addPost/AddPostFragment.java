@@ -4,12 +4,15 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -21,13 +24,18 @@ import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LiveData;
 import androidx.navigation.Navigation;
 
 import com.example.discoverpic.databinding.FragmentAddpostBinding;
+import com.example.discoverpic.model.Country;
+import com.example.discoverpic.model.CountryModel;
 import com.example.discoverpic.model.FirebaseModel;
 import com.example.discoverpic.model.Model;
 import com.example.discoverpic.model.Post;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 public class AddPostFragment extends Fragment {
@@ -65,6 +73,20 @@ public class AddPostFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentAddpostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        List<String> countries = new LinkedList<>();
+        LiveData<List<Country>> data = CountryModel.instance.getCountriesAndCities();
+        data.observe(getViewLifecycleOwner(),list->{
+            list.forEach(item->{
+                countries.add(item.getCountry());
+            });
+        });
+
+        Spinner spinner = (Spinner) binding.countrySpinner;
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_item, countries);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         binding.saveBtn.setOnClickListener(view1 -> {
             String name = binding.nameEt.getText().toString();
