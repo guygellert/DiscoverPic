@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,7 +34,10 @@ import com.example.discoverpic.model.CountryModel;
 import com.example.discoverpic.model.FirebaseModel;
 import com.example.discoverpic.model.Model;
 import com.example.discoverpic.model.Post;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -44,6 +48,7 @@ public class AddPostFragment extends Fragment {
     ActivityResultLauncher<Void> cameraLauncher;
     ActivityResultLauncher<String> galleryLauncher;
     Boolean isAvatarSelected = false;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,26 +79,58 @@ public class AddPostFragment extends Fragment {
         binding = FragmentAddpostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        List<String> countries = new LinkedList<>();
+        ArrayList<String> countries = new ArrayList<String>();
+        ArrayList<String> cities = new ArrayList<String>();
         LiveData<List<Country>> data = CountryModel.instance.getCountriesAndCities();
+
+        Spinner countrySpinner = (Spinner) binding.countrySpinner;
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_item, countries);
+        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        countrySpinner.setAdapter(countryAdapter);
+
+        Spinner citySpinner = (Spinner) binding.citySpinner;
+        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_item, cities);
+        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(cityAdapter);
+
         data.observe(getViewLifecycleOwner(),list->{
             list.forEach(item->{
                 countries.add(item.getCountry());
             });
+
+            countryAdapter.notifyDataSetChanged();
         });
 
-        Spinner spinner = (Spinner) binding.countrySpinner;
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_item, countries);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                data.getValue().forEach(item->{
+                    if(item.getCountry().equals(adapterView.getItemAtPosition(i))){
+                        cities.clear();
+                        for (String city : item.getCities()) {
+                            cities.add(city);
+                        }
+
+                        cityAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Log.d("TAG", "onNothingSelected: ");
+            }
+        });
 
         binding.saveBtn.setOnClickListener(view1 -> {
             String name = binding.nameEt.getText().toString();
-            String city = binding.cityEt.getText().toString();
-            String country = binding.countryEt.getText().toString();
+            String city = binding.citySpinner.getSelectedItem().toString();
+            String country = binding.countrySpinner.getSelectedItem().toString();
             String id = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
-            Post post = new Post(id,name,"",city, country, "456");
+            FirebaseUser currentUser = auth.getCurrentUser();
+            Post post = new Post(id,name,"",city, country, currentUser.getUid());
 
             if (isAvatarSelected){
                 binding.avatarImg.setDrawingCacheEnabled(true);

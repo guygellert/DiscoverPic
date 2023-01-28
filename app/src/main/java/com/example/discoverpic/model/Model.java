@@ -9,6 +9,9 @@ import androidx.core.os.HandlerCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -20,6 +23,8 @@ public class Model {
     private Handler mainHandler = HandlerCompat.createAsync(Looper.getMainLooper());
     private FirebaseModel firebaseModel = new FirebaseModel();
     AppLocalDbRepository localDb = AppLocalDb.getAppDb();
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = auth.getCurrentUser();
 
     public static Model instance(){
         return _instance;
@@ -49,7 +54,7 @@ public class Model {
     private LiveData<List<Post>> userPostsList;
     public LiveData<List<Post>> getUserPosts() {
         if(userPostsList == null){
-            userPostsList = localDb.postDao().getPostsByUserId("456");
+            userPostsList = localDb.postDao().getPostsByUserId(currentUser.getUid());
             refreshAllPosts();
         }
         return userPostsList;
