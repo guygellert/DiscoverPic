@@ -6,4 +6,109 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <TextView
+        android:id="@+id/headerGame"
+        android:layout_width="402dp"
+        android:layout_height="72dp"
+        android:text="Where is this?"
+        android:textAlignment="center"
+        android:textSize="64px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/qImage"
+        android:layout_width="320dp"
+        android:layout_height="212dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerGame"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="383dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qImage">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/Button1"
+                android:layout_width="141dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:onClick="checkAnswer"
+                android:text="Button"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/Button2"
+                android:layout_width="141dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="Button"
+                tools:textSize="10sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/Button3"
+                android:layout_width="141dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="Button"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/Button4"
+                android:layout_width="141dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="Button"
+                android:textSize="10sp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        tools:layout_editor_absoluteX="20dp">
+
+        <Button
+            android:id="@+id/newButton"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:text="New Question" />
+
+        <Button
+            android:id="@+id/HintButton"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:text="Hint" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/hintText"
+        android:layout_width="317dp"
+        android:layout_height="27dp"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/qImage"
+        tools:layout_editor_absoluteX="47dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

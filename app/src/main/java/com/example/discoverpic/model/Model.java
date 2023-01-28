@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -60,6 +61,7 @@ public class Model {
         return userPostsList;
     }
 
+
     public void refreshAllPosts(){
         EventPostsListLoadingState.setValue(LoadingState.LOADING);
 
@@ -95,5 +97,15 @@ public class Model {
     public void uploadImage(String name, Bitmap bitmap,Listener<String> listener) {
         firebaseModel.uploadImage(name,bitmap,listener);
     }
+//    public Post getRandomPost(){
+//        LiveData<List<Post>> postInDb = getAllPosts();
+//        List<Post> listPost = postInDb.getValue();
+//        if(listPost.size() > 0) {
+//            Random rnd = new Random();
+//            int postIndex = rnd.nextInt(3);
+//            return listPost.get(postIndex);
+//        }
+//        return null;
+//    };
 
 }

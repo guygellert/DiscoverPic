@@ -5,4 +5,8 @@
     <item name="address" type="id" />
     <item name="email" type="id" />
     <item name="register" type="id" />
+    <item name="Button1" type="id"/>
+    <item name="Button2" type="id"/>
+    <item name="Button3" type="id"/>
+    <item name="Button4" type="id"/>
 </resources>

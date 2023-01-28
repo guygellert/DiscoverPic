@@ -44,7 +44,8 @@ enum Sign{ SIGNUP,REGISTER}
     private LoginViewModel loginViewModel;
     private FirebaseAuth mAuth;
     private Sign signMethod = Sign.SIGNUP;
-private ActivityLoginBinding binding;
+    private UserProfileChangeRequest profileUpdates;
+    private ActivityLoginBinding binding;
 
     @Override
     public void onStart() {
@@ -73,7 +74,7 @@ private ActivityLoginBinding binding;
         final Switch registerSwitch = binding.RegisterSwitch;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+        profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(DisplayName.getText().toString()).build();
 //                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
 
@@ -183,11 +184,12 @@ private ActivityLoginBinding binding;
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
-                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                        profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(DisplayName.getText().toString()).build();
                                         updateProfile(user,profileUpdates);
 //                                    updateUI(user);
-                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(i);
+
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -208,6 +210,8 @@ private ActivityLoginBinding binding;
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "User profile updated.");
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
                         }
                     }
                 });
