@@ -163,6 +163,8 @@ private ActivityLoginBinding binding;
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         updateProfile(user,profileUpdates);
 //                                    updateUI(user);
+                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(i);
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());
