@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -15,6 +16,7 @@ import com.example.discoverpic.R;
 import com.example.discoverpic.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 
 public class ProfileFragment extends Fragment {
@@ -29,11 +31,13 @@ public class ProfileFragment extends Fragment {
         View root = binding.getRoot();
         if(user != null) {
             String name = user.getDisplayName();
-            TextView profleName = root.findViewById(R.id.profileName);
-            profleName.setText(name);
+            TextView profileName = root.findViewById(R.id.profileName);
+            ImageView profileImg =  root.findViewById(R.id.profileImg);
+            profileName.setText(name);
+            if(user.getPhotoUrl() != null) {
+                Picasso.get().load(user.getPhotoUrl()).into(profileImg);
+            }
         }
-
-
         return root;
     }
 }
