@@ -41,41 +41,40 @@
 
             <Button
                 android:id="@+id/Button1"
-                android:layout_width="141dp"
-                android:layout_height="48dp"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
-                android:onClick="checkAnswer"
                 android:text="Button"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/Button2"
-                android:layout_width="141dp"
-                android:layout_height="48dp"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 android:text="Button"
-                tools:textSize="10sp" />
+                tools:textSize="12sp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="77dp">
 
             <Button
                 android:id="@+id/Button3"
-                android:layout_width="141dp"
-                android:layout_height="48dp"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 android:text="Button"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/Button4"
-                android:layout_width="141dp"
-                android:layout_height="48dp"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 android:text="Button"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
         </TableRow>
 
     </TableLayout>
@@ -85,8 +84,9 @@
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
-        tools:layout_editor_absoluteX="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2">
 
         <Button
             android:id="@+id/newButton"
@@ -105,10 +105,11 @@
         android:id="@+id/hintText"
         android:layout_width="317dp"
         android:layout_height="27dp"
-        android:text="TextView"
+        android:text="hint"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/qImage"
-        tools:layout_editor_absoluteX="47dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

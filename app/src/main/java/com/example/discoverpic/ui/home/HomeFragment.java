@@ -223,12 +223,23 @@ public class HomeFragment extends Fragment {
         Random rnd = new Random();
         int postId = rnd.nextInt(list.size());
         Post p = list.get(postId);
-        while(p.getImgUrl().length() == 0 || usedPost.contains(p) ){
+        while(p.getImgUrl().length() == 0 || comparePost(p,usedPost)){
             postId = rnd.nextInt(list.size());
             p = list.get(postId);
         }
 
         return postId;
+    }
+    private boolean comparePost(Post p, List<Post> usedPost)
+    {
+        for(int i = 0 ; i < usedPost.size(); i++)
+        {
+            if(p.getCountry().equals(usedPost.get(i).getCountry()) &&
+               p.getCity().equals(usedPost.get(i).getCity())){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
