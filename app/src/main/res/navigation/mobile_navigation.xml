@@ -16,11 +16,26 @@
         android:id="@+id/navigation_addpost"
         android:name="com.example.discoverpic.ui.addPost.AddPostFragment"
         android:label="@string/title_Camara"
-        tools:layout="@layout/fragment_addpost" />
+        tools:layout="@layout/fragment_addpost" >
+        <argument
+            android:name="country"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.discoverpic.ui.profile.ProfileFragment"
         android:label="@string/title_Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_addpost"
+            app:destination="@id/navigation_addpost" />
+    </fragment>
 </navigation>

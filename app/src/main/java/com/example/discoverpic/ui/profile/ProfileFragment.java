@@ -25,17 +25,16 @@ public class ProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        user = FirebaseAuth.getInstance().getCurrentUser();
-
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
         if(user != null) {
             String name = user.getDisplayName();
-            TextView profileName = root.findViewById(R.id.profileName);
-            ImageView profileImg =  root.findViewById(R.id.profileImg);
-            profileName.setText(name);
+            binding.profileName.setText(name);
             if(user.getPhotoUrl() != null) {
-                Picasso.get().load(user.getPhotoUrl()).into(profileImg);
+                Picasso.get().load(user.getPhotoUrl()).into(binding.profileImg);
             }
         }
         return root;

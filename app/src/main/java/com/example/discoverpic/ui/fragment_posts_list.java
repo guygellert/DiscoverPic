@@ -18,9 +18,6 @@ import com.example.discoverpic.databinding.FragmentPostsListBinding;
 
 import com.example.discoverpic.ui.profile.ProfileViewModel;
 
-
-
-
 public class fragment_posts_list extends Fragment {
     FragmentPostsListBinding binding;
     ProfileViewModel viewModel;

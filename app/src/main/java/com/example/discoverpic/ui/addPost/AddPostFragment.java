@@ -95,6 +95,19 @@ public class AddPostFragment extends Fragment {
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(cityAdapter);
 
+        AddPostFragmentArgs args = AddPostFragmentArgs.fromBundle(getArguments());
+
+        if(args != null) {
+            String postCountry = args.getCountry();
+            String postName = args.getDescription();
+
+            binding.nameEt.setText(postName);
+
+            Log.d("TAG", "onCreateView: " + postCountry);
+            Log.d("TAG", "onCreateView: " + countryAdapter.getPosition(postCountry));
+            binding.countrySpinner.setSelection(countryAdapter.getPosition(postCountry));
+        }
+
         data.observe(getViewLifecycleOwner(),list->{
             list.forEach(item->{
                 countries.add(item.getCountry());
