@@ -25,7 +25,7 @@
 
         <ImageView
             android:id="@+id/profileImg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="fitCenter"
             android:src="@drawable/avatar"
@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="45dp"
-            android:text="Israela lalala"
             android:textSize="30sp" />
 
         <TextView

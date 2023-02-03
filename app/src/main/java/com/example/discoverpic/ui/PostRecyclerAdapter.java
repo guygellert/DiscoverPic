@@ -8,12 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.discoverpic.R;
 import com.example.discoverpic.model.Post;
+import com.example.discoverpic.ui.profile.ProfileFragmentDirections;
 import com.squareup.picasso.Picasso;
-//import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +24,7 @@ class PostViewHolder extends RecyclerView.ViewHolder{
     TextView nameTv;
     TextView locationTv;
     ImageView avatarImage;
+    ImageView editBtn;
     List<Post> data;
 
     public PostViewHolder(@NonNull View itemView, List<Post> data) {
@@ -31,6 +33,22 @@ class PostViewHolder extends RecyclerView.ViewHolder{
         nameTv = itemView.findViewById(R.id.postrow_name_tv);
         locationTv = itemView.findViewById(R.id.postrow_location_tv);
         avatarImage = itemView.findViewById(R.id.postrow_avatar_img);
+        editBtn = itemView.findViewById(R.id.postrow_edit);
+
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int pos = getAdapterPosition();
+                Post post = data.get(pos);
+                ProfileFragmentDirections.ActionNavigationProfileToNavigationAddpost action = ProfileFragmentDirections.actionNavigationProfileToNavigationAddpost();
+                action.setPostId(post.getId());
+                action.setCountry(post.getCountry());
+                action.setCity(post.getCity());
+                action.setDescription(post.getName());
+                action.setImgUrl(post.getImgUrl());
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
     }
 
     public void bind(Post post) {

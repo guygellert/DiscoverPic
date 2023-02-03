@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DiscoverPic</string>
     <string name="title_home">Home</string>
-    <string name="title_Camara">Add post</string>
+    <string name="title_Camera">Add post</string>
     <string name="title_Profile">Profile</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_activity_login">LoginActivity</string>
