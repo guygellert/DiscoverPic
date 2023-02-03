@@ -41,8 +41,11 @@ class PostViewHolder extends RecyclerView.ViewHolder{
                 int pos = getAdapterPosition();
                 Post post = data.get(pos);
                 ProfileFragmentDirections.ActionNavigationProfileToNavigationAddpost action = ProfileFragmentDirections.actionNavigationProfileToNavigationAddpost();
+                action.setPostId(post.getId());
                 action.setCountry(post.getCountry());
+                action.setCity(post.getCity());
                 action.setDescription(post.getName());
+                action.setImgUrl(post.getImgUrl());
                 Navigation.findNavController(view).navigate(action);
             }
         });

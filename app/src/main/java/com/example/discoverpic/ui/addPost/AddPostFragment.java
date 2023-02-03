@@ -6,40 +6,36 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.MenuProvider;
+import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 import androidx.navigation.Navigation;
 
+import com.example.discoverpic.R;
 import com.example.discoverpic.databinding.FragmentAddpostBinding;
 import com.example.discoverpic.model.Country;
 import com.example.discoverpic.model.CountryModel;
-import com.example.discoverpic.model.FirebaseModel;
 import com.example.discoverpic.model.Model;
 import com.example.discoverpic.model.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class AddPostFragment extends Fragment {
@@ -53,6 +49,12 @@ public class AddPostFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AddPostFragmentArgs args = AddPostFragmentArgs.fromBundle(getArguments());
+
+        if(args.getCountry() != null) {
+            ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Edit post");
+        }
 
         cameraLauncher = registerForActivityResult(new ActivityResultContracts.TakePicturePreview(), new ActivityResultCallback<Bitmap>() {
             @Override
@@ -97,15 +99,18 @@ public class AddPostFragment extends Fragment {
 
         AddPostFragmentArgs args = AddPostFragmentArgs.fromBundle(getArguments());
 
-        if(args != null) {
-            String postCountry = args.getCountry();
-            String postName = args.getDescription();
-
+        String postName = args.getDescription();
+        if(postName != null) {
             binding.nameEt.setText(postName);
+        }
 
-            Log.d("TAG", "onCreateView: " + postCountry);
-            Log.d("TAG", "onCreateView: " + countryAdapter.getPosition(postCountry));
-            binding.countrySpinner.setSelection(countryAdapter.getPosition(postCountry));
+        String imgUrl = args.getImgUrl();
+        if(imgUrl != null) {
+            if (!Objects.equals(imgUrl, "")) {
+                Picasso.get().load(imgUrl).placeholder(R.drawable.tree).into(binding.avatarImg);
+            }else{
+                binding.avatarImg.setImageResource(R.drawable.tree);
+            }
         }
 
         data.observe(getViewLifecycleOwner(),list->{
@@ -113,7 +118,13 @@ public class AddPostFragment extends Fragment {
                 countries.add(item.getCountry());
             });
 
+            String postCountry = args.getCountry();
+            if(postCountry != null) {
+                binding.countrySpinner.setSelection(countries.indexOf(postCountry));
+            }
+
             countryAdapter.notifyDataSetChanged();
+            binding.progressBarAddPost.setVisibility(View.GONE);
         });
 
         countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -124,6 +135,11 @@ public class AddPostFragment extends Fragment {
                         cities.clear();
                         for (String city : item.getCities()) {
                             cities.add(city);
+                        }
+
+                        String postCity = args.getCity();
+                        if(postCity != null) {
+                            binding.citySpinner.setSelection(cities.indexOf(postCity));
                         }
 
                         cityAdapter.notifyDataSetChanged();
@@ -138,11 +154,17 @@ public class AddPostFragment extends Fragment {
         });
 
         binding.saveBtn.setOnClickListener(view1 -> {
+            String id;
             String name = binding.nameEt.getText().toString();
             String city = binding.citySpinner.getSelectedItem().toString();
             String country = binding.countrySpinner.getSelectedItem().toString();
-            String id = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
             FirebaseUser currentUser = auth.getCurrentUser();
+
+            id = args.getPostId();
+            if(id == null) {
+                id = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+            }
+
             Post post = new Post(id,name,"",city, country, currentUser.getUid());
 
             if (isAvatarSelected){
@@ -158,6 +180,11 @@ public class AddPostFragment extends Fragment {
                     });
                 });
             }else {
+                String postUrl = args.getImgUrl();
+                if(postUrl != null) {
+                    post.setImgUrl(postUrl);
+                }
+
                 Model.instance().addPost(post, (unused) -> {
                     Navigation.findNavController(view1).popBackStack();
                 });

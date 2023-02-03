@@ -15,18 +15,33 @@
     <fragment
         android:id="@+id/navigation_addpost"
         android:name="com.example.discoverpic.ui.addPost.AddPostFragment"
-        android:label="@string/title_Camara"
-        tools:layout="@layout/fragment_addpost" >
+        android:label="@string/title_Camera"
+        tools:layout="@layout/fragment_addpost">
         <argument
             android:name="country"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null"/>
+            app:nullable="true" />
         <argument
             android:name="description"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null"/>
+            app:nullable="true" />
+        <argument
+            android:name="imgUrl"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="city"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="postId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
     <fragment
