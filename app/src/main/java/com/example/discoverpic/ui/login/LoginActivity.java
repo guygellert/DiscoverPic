@@ -67,7 +67,8 @@ enum Sign{ SIGNUP,REGISTER}
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-//            reload();
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
         }
     }
 
