@@ -16,8 +16,8 @@
 
     <FrameLayout
         android:id="@+id/profile_frame_layout"
-        android:layout_width="419dp"
-        android:layout_height="376dp"
+        android:layout_width="403dp"
+        android:layout_height="406dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,16 +39,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:clickable="false"
-                android:textColor="@color/black"
-                android:gravity="top|bottom"
                 android:id="@+id/profileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="45dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:gravity="top|bottom"
+                android:textColor="@color/black"
                 android:textSize="30sp" />
 
             <Button
@@ -84,8 +84,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="com.example.discoverpic.ui.fragment_posts_list"
-        android:layout_width="409dp"
-        android:layout_height="299dp"
+        android:layout_width="386dp"
+        android:layout_height="308dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

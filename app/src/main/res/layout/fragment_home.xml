@@ -1,115 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/headerGame"
-        android:layout_width="402dp"
-        android:layout_height="72dp"
-        android:text="Where is this?"
-        android:textAlignment="center"
-        android:textSize="64px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/qImage"
-        android:layout_width="320dp"
-        android:layout_height="212dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerGame"
-        tools:src="@tools:sample/backgrounds/scenic" />
-
-    <TableLayout
-        android:id="@+id/tableLayout2"
-        android:layout_width="383dp"
-        android:layout_height="300dp"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.discoverpic.ui.quiz_list"
+        android:layout_width="406dp"
+        android:layout_height="731dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qImage">
+        tools:layout="@layout/fragment_quiz_list" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<!--    <TextView-->
+<!--        android:id="@+id/headerGame"-->
+<!--        android:layout_width="402dp"-->
+<!--        android:layout_height="72dp"-->
+<!--        android:text="Where is this?"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="64px"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-            <Button
-                android:id="@+id/Button1"
-                android:layout_width="140dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:text="Button"
-                android:textSize="12sp" />
+<!--    <ImageView-->
+<!--        android:id="@+id/qImage"-->
+<!--        android:layout_width="320dp"-->
+<!--        android:layout_height="212dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/headerGame"-->
+<!--        tools:src="@tools:sample/backgrounds/scenic" />-->
 
-            <Button
-                android:id="@+id/Button2"
-                android:layout_width="140dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:text="Button"
-                tools:textSize="12sp" />
-        </TableRow>
+<!--    <TableLayout-->
+<!--        android:id="@+id/tableLayout2"-->
+<!--        android:layout_width="383dp"-->
+<!--        android:layout_height="300dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/qImage">-->
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="77dp">
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
 
-            <Button
-                android:id="@+id/Button3"
-                android:layout_width="140dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:text="Button"
-                android:textSize="12sp" />
+<!--            <Button-->
+<!--                android:id="@+id/Button1"-->
+<!--                android:layout_width="140dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Button"-->
+<!--                android:textSize="12sp" />-->
 
-            <Button
-                android:id="@+id/Button4"
-                android:layout_width="140dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:text="Button"
-                android:textSize="12sp" />
-        </TableRow>
+<!--            <Button-->
+<!--                android:id="@+id/Button2"-->
+<!--                android:layout_width="140dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Button"-->
+<!--                tools:textSize="12sp" />-->
+<!--        </TableRow>-->
 
-    </TableLayout>
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="77dp">-->
 
-    <LinearLayout
-        android:layout_width="375dp"
-        android:layout_height="64dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout2">
+<!--            <Button-->
+<!--                android:id="@+id/Button3"-->
+<!--                android:layout_width="140dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Button"-->
+<!--                android:textSize="12sp" />-->
 
-        <Button
-            android:id="@+id/newButton"
-            android:layout_width="187dp"
-            android:layout_height="wrap_content"
-            android:text="New Question" />
+<!--            <Button-->
+<!--                android:id="@+id/Button4"-->
+<!--                android:layout_width="140dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Button"-->
+<!--                android:textSize="12sp" />-->
+<!--        </TableRow>-->
 
-        <Button
-            android:id="@+id/HintButton"
-            android:layout_width="186dp"
-            android:layout_height="wrap_content"
-            android:text="Hint" />
-    </LinearLayout>
+<!--    </TableLayout>-->
 
-    <TextView
-        android:id="@+id/hintText"
-        android:layout_width="317dp"
-        android:layout_height="27dp"
-        android:text="hint"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qImage" />
+<!--    <LinearLayout-->
+<!--        android:layout_width="375dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tableLayout2">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/newButton"-->
+<!--            android:layout_width="187dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="New Question" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/HintButton"-->
+<!--            android:layout_width="186dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Hint" />-->
+<!--    </LinearLayout>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/hintText"-->
+<!--        android:layout_width="317dp"-->
+<!--        android:layout_height="27dp"-->
+<!--        android:text="hint"-->
+<!--        android:visibility="invisible"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/tableLayout2"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/qImage" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
