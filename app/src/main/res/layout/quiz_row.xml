@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/headerGame"
+        android:layout_width="402dp"
+        android:layout_height="72dp"
+        android:text="Where is this?"
+        android:textAlignment="center"
+        android:textSize="64px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/qImage"
+        android:layout_width="320dp"
+        android:layout_height="212dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerGame"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="371dp"
+        android:layout_height="157dp"
+        android:gravity="bottom|center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qImage">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/Button1"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="Button"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/Button2"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="Button"
+                android:textSize="10sp"
+                tools:layout_marginRight="5dp"
+                tools:textSize="10sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="77dp">
+
+            <Button
+                android:id="@+id/Button3"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="Button"
+                android:textSize="10sp"
+                tools:layout_marginLeft="5dp" />
+
+            <Button
+                android:id="@+id/Button4"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="Button"
+                android:textSize="10sp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="373dp"
+        android:layout_height="53dp"
+        android:gravity="bottom|center"
+        android:orientation="horizontal"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/HintButton"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:text="Hint" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/hintText"
+        android:layout_width="317dp"
+        android:layout_height="27dp"
+        android:text="hint"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,24 +1,11 @@
 package  com.example.discoverpic.ui.login;
 
 import android.app.Activity;
-
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -27,18 +14,24 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.discoverpic.MainActivity;
 import com.example.discoverpic.R;
-import com.example.discoverpic.model.Model;
-import com.example.discoverpic.ui.login.LoginViewModel;
-import com.example.discoverpic.ui.login.LoginViewModelFactory;
 import com.example.discoverpic.databinding.ActivityLoginBinding;
+import com.example.discoverpic.model.Model;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -67,7 +60,8 @@ enum Sign{ SIGNUP,REGISTER}
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-//            reload();
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
         }
     }
 
@@ -85,24 +79,28 @@ enum Sign{ SIGNUP,REGISTER}
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final EditText DisplayName = binding.DisplayName;
-        final Switch registerSwitch = binding.RegisterSwitch;
+//        final Switch registerSwitch = binding.RegisterSwitch;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
-        registerSwitch.setOnClickListener(new View.OnClickListener() {
+        binding.switchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(registerSwitch.isChecked()) {
+                if(signMethod == Sign.SIGNUP) {
                     DisplayName.setVisibility(v.VISIBLE);
                     binding.imageView.setVisibility(v.VISIBLE);
                     binding.galleryButton.setVisibility(v.VISIBLE);
                     binding.cameraButton.setVisibility(v.VISIBLE);
+                    binding.switchButton.setText("Sign In Existing Account");
+                    signMethod = Sign.REGISTER;
                 }
-                else{
+                else if( signMethod == Sign.REGISTER){
                     DisplayName.setVisibility(v.INVISIBLE);
                     binding.imageView.setVisibility(v.INVISIBLE);
                     binding.galleryButton.setVisibility(v.INVISIBLE);
                     binding.cameraButton.setVisibility(v.INVISIBLE);
+                    binding.switchButton.setText("Create New Account");
+                    signMethod = Sign.SIGNUP;
                 }
             }
         });
@@ -207,7 +205,7 @@ enum Sign{ SIGNUP,REGISTER}
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                if(!registerSwitch.isChecked()) {
+                if(signMethod == Sign.SIGNUP) {
                     mAuth.signInWithEmailAndPassword(usernameEditText.getText().toString(), passwordEditText.getText().toString())
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override

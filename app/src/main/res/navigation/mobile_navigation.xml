@@ -45,12 +45,31 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_edit_profile"
+        android:name="com.example.discoverpic.ui.editProfile"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <argument
+            android:name="userName"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="profileUrl"
+            app:argType="android.net.Uri"
+            app:nullable="true" />
+    </fragment>
+    <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.discoverpic.ui.profile.ProfileFragment"
         android:label="@string/title_Profile"
         tools:layout="@layout/fragment_profile" >
         <action
+            android:id="@+id/action_navigation_profile_to_edit_profile"
+            app:destination="@id/navigation_edit_profile" />
+        <action
             android:id="@+id/action_navigation_profile_to_navigation_addpost"
             app:destination="@id/navigation_addpost" />
+
     </fragment>
+
 </navigation>
