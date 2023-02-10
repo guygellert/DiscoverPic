@@ -9,8 +9,9 @@
 
     <TextView
         android:id="@+id/headerGame"
-        android:layout_width="402dp"
-        android:layout_height="72dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Where is this?"
         android:textAlignment="center"
         android:textSize="64px"
@@ -51,7 +52,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:text="Button"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/Button2"
@@ -60,9 +61,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:text="Button"
-                android:textSize="10sp"
                 tools:layout_marginRight="5dp"
-                tools:textSize="10sp" />
+                tools:textSize="12sp" />
         </TableRow>
 
         <TableRow
@@ -76,7 +76,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:text="Button"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 tools:layout_marginLeft="5dp" />
 
             <Button
@@ -87,7 +87,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:text="Button"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
         </TableRow>
 
     </TableLayout>
@@ -116,6 +116,7 @@
         android:layout_width="317dp"
         android:layout_height="27dp"
         android:text="hint"
+        android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
         app:layout_constraintEnd_toEndOf="parent"
