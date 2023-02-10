@@ -126,6 +126,11 @@ public class editProfile extends Fragment {
             isAvatarSelected = false;
 
         });
+
+        binding.cancelEditProfile.setOnClickListener(view1 ->
+                Navigation.findNavController(view1).popBackStack()
+        );
+
         return root;
     }
 }

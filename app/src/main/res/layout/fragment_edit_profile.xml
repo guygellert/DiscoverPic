@@ -12,9 +12,9 @@
         android:id="@+id/DisplayName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
         android:layout_marginTop="248dp"
         android:hint="User Name"
-        android:layout_gravity="bottom|center"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         android:visibility="visible"
@@ -64,11 +64,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:background="@android:color/transparent"
         android:text="Save Profile"
+        app:layout_constraintEnd_toStartOf="@+id/cancelEditProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DisplayName" />
+
+    <Button
+        android:id="@+id/cancelEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@android:color/transparent"
+        android:text="Cancel"
         android:textColor="@color/design_default_color_primary_dark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/saveProfile"
         app:layout_constraintTop_toBottomOf="@+id/DisplayName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
