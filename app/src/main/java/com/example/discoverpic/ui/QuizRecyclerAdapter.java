@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.discoverpic.R;
 import com.example.discoverpic.model.Post;
 import com.example.discoverpic.ui.home.HomeViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -278,12 +280,24 @@ class QuizViewHolder extends RecyclerView.ViewHolder{
 public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizViewHolder>{
     LayoutInflater inflater;
     List<Post> data;
-    private List<Post> usedQuestionPost;
+    private static List<Post> usedQuestionPost = new ArrayList<Post>(); ;
     private List<Post> gameList;
     public void setData(List<Post> data){
         this.data = data;
-        usedQuestionPost = new ArrayList<Post>();
         gameList = data;
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        int indexPost;
+        if(this.data != null) {
+            for (indexPost = 0; indexPost < this.data.size(); ) {
+                if (this.data.get(indexPost).getImgUrl().equals("") ||
+                        this.data.get(indexPost).getUserId().equals(currentUser.getUid())) {
+                    this.data.remove(indexPost);
+                } else {
+                    indexPost++;
+                }
+            }
+        }
         notifyDataSetChanged();
     }
     public QuizRecyclerAdapter(LayoutInflater inflater, List<Post> data){
@@ -296,6 +310,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizViewHolder>{
     public QuizViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.quiz_row,parent,false);
+
         return new QuizViewHolder(view, data);
     }
 
@@ -304,20 +319,48 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizViewHolder>{
         Random rnd = new Random();
         int postId;
         Post post;
-        if(position > usedQuestionPost.size() - 1)
+        List<Post> tempList = new ArrayList<Post>();
+        tempList.addAll(data);
+        tempList.removeAll(usedQuestionPost);
+        while(position > usedQuestionPost.size() - 1 )
         {
-            postId = holder.getRandomPostId(data,usedQuestionPost);
-            post  = data.get(postId);
-            while (holder.comparePost(post,usedQuestionPost)){
-                postId = holder.getRandomPostId(data,usedQuestionPost);
-                post  = data.get(postId);
+            postId = getRandomPostId(tempList,usedQuestionPost);
+            post  = tempList.get(postId);
+            while (comparePostId(post,usedQuestionPost)){
+                postId = getRandomPostId(tempList,usedQuestionPost);
+                post  = tempList.get(postId);
             }
             usedQuestionPost.add(post);
+            tempList.remove(post);
         }
-        post = usedQuestionPost.get(position);
-        holder.bind(post,data);
-    }
+            post = usedQuestionPost.get(position);
+            holder.bind(post, data);
 
+
+
+    }
+    public int getRandomPostId(List<Post> list,List<Post>usedPost)
+    {
+        Random rnd = new Random();
+        int postId = rnd.nextInt(list.size());
+        Post p = list.get(postId);
+        while(p.getImgUrl().length() == 0 || comparePostId(p,usedPost)){
+            postId = rnd.nextInt(list.size());
+            p = list.get(postId);
+        }
+
+        return postId;
+    }
+    public boolean comparePostId(Post p, List<Post> usedPost)
+    {
+        for(int i = 0 ; i < usedPost.size(); i++)
+        {
+            if(p.getId().equals(usedPost.get(i).getId())){
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public int getItemCount() {
         if (data == null) return 0;

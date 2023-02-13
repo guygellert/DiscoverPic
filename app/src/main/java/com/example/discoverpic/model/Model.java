@@ -3,7 +3,6 @@ package com.example.discoverpic.model;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.core.os.HandlerCompat;
 import androidx.lifecycle.LiveData;
@@ -13,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -53,10 +51,15 @@ public class Model {
     }
 
     private LiveData<List<Post>> userPostsList;
+    private String userid;
     public LiveData<List<Post>> getUserPosts() {
-        if(userPostsList == null){
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+        String currentUserId = currentUser.getUid();
+        if(userPostsList == null || currentUserId.compareTo(userid) != 0){
             userPostsList = localDb.postDao().getPostsByUserId(currentUser.getUid());
             refreshAllPosts();
+            userid = currentUserId;
         }
         return userPostsList;
     }
