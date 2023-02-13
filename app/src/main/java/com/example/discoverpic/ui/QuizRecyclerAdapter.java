@@ -174,6 +174,7 @@ class QuizViewHolder extends RecyclerView.ViewHolder{
 //            Toast.makeText(view.getContext(),"Wrong!",Toast.LENGTH_LONG);
 //        }
         colorCorrectButton(view);
+        hintText.setVisibility(View.VISIBLE);
     }
 
     private void colorCorrectButton(View v){
